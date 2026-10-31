@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murray's Legend of the Line: The Brag Book</title>
+    <style>
+        :root {
+            --wood-dark: #2a1810;
+            --wood-medium: #4e3120;
+            --paper-bg: #f4ecd8;
+            --paper-shadow: rgba(0, 0, 0, 0.35);
+            --polaroid-bg: #fffdf9;
+        }
+
+        body {
+            background-color: var(--wood-dark);
+            background-image: radial-gradient(circle, #3d2416 0%, #2a1810 100%);
+            color: #2b2b2b;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(45, 74, 39, 0.85);
+            border: 4px dashed #d4af37;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px #000;
+        }
+
+        p.subtitle {
+            color: #e2f0d9;
+            font-size: 1rem;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .book-container {
+            background-color: var(--paper-bg);
+            background-image: linear-gradient(to right, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 5%);
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 40px rgba(139, 107, 72, 0.2);
+            border-left: 12px solid #362114;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+
+        .polaroid {
+            background: var(--polaroid-bg);
+            padding: 12px 12px 25px 12px;
+            box-shadow: 0 6px 15px var(--paper-shadow);
+            transform: rotate(-1.5deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid #e0d6c1;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:hover {
+            transform: scale(1.03) rotate(0deg);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #dcd6c9;
+            display: block;
+        }
+
+        .caption {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 20px;
+            background-color: rgba(230, 215, 175, 0.7);
+            border: 1px dashed rgba(180, 160, 120, 0.5);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #c5b39e;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border: 5px solid #fff;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎣 Murray's Legend of the Line</h1>
+        <p class="subtitle">The Official Fisherman’s Brag Book & Cautionary Guide</p>
+    </header>
+
+    <div class="book-container">
+        <div class="gallery-grid">
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415394711.jpg" alt="The Great Catch">
+                <div class="caption">The legendary hat-hooking victory!</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415442530.jpg" alt="Tangled Line">
+                <div class="caption">The Bait Escape & The Tangled Line of Duty.</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415436218.jpg" alt="Advanced Casting">
+                <div class="caption">"Match the hatch? I didn't know the hatch was this fancy!"</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415449119.jpg" alt="Beard-Dowsing">
+                <div class="caption">The 'Patience of a Saint' & Beard-dowsing technique.</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415456268.jpg" alt="Leather-back Sole">
+                <div class="caption">Catching the elusive 'leather-back sole' boot.</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415461927.jpg" alt="TNT Fishing Guide">
+                <div class="caption">A Gnome's Guide to TNT Fishing: A Cautionary Tale.</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415467803.jpg" alt="Return to Simplicity">
+                <div class="caption">Back on the water: Meeting the hostile amphibian.</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415474511.jpg" alt="The Grand Catch">
+                <div class="caption">Another magnificent river fighter secured!</div>
+            </div>
+
+            <div class="polaroid" onclick="openModal(this)">
+                <img src="1793415480421.jpg" alt="Zen of Angling">
+                <div class="caption">The Zen of Angling: 'Not fishing' is the best fishing.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Tap any photo to enlarge • Handcrafted for Peter's Ultimate NFC Experience
+    </footer>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        function openModal(element) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+            const img = element.querySelector("img");
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
